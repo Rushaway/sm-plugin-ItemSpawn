@@ -316,12 +316,18 @@ public void SpawnTNT(float fOrigin[3])
 
 public void TNTPickup(const char[] output, int caller, int activator, float delay)
 {
-	ServerCommand("say ** %N has picked up TNT", activator);
+	if (!IsValidClient(activator))
+		return;
+
+	ServerCommand("say ** %N has picked up TNT **", activator);
 	PrintToChat(activator, " RIGHT CLICK = Launch TNT and LEFT CLICK = Switch between 'put down' and 'throw'.");
 }
 
 public void TNTUse(const char[] output, int caller, int activator, float delay)
 {
+	if (!IsValidClient(activator))
+		return;
+
 	char sBuffer[256];
 	float fOrigin[3];
 	float fAngles[3];

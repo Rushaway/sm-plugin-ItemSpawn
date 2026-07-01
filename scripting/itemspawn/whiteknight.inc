@@ -605,6 +605,9 @@ public void SpawnWhiteKnight(float fOrigin[3])
 
 public void WhiteKnightPickup(const char[] output, int caller, int activator, float delay)
 {
+	if (!IsValidClient(activator))
+		return;
+
 	ServerCommand("say ** %N has picked up the White Knight **", activator);
 	PrintToChat(activator, " LEFT CLICK = ATTACK and RIGHT CLICK = SHIELD.");
 	CreateTimer(2.0, EquipWeapons, GetClientUserId(activator), TIMER_FLAG_NO_MAPCHANGE);

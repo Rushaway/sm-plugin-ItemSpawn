@@ -31,7 +31,7 @@ public Plugin myinfo =
 	author      = "Original by Neon, Updated by koen",
 	description = "",
 	version     = "1.2.0",
-}
+};
 
 public void OnPluginStart()
 {
@@ -165,8 +165,8 @@ public void OnMapStart()
 	AddFileToDownloadsTable("models/staff/staff.phy");
 	// AddFileToDownloadsTable("models/staff/staff.sw.vtx");
 	AddFileToDownloadsTable("models/staff/staff.vvd");
-	AddFileToDownloadsTable("materials/models/Staff/staffofmagnus.vmt");
-	AddFileToDownloadsTable("materials/models/Staff/staffofmagnus.vtf");
+	AddFileToDownloadsTable("materials/models/staff/staffofmagnus.vmt");
+	AddFileToDownloadsTable("materials/models/staff/staffofmagnus.vtf");
 
 	// Earth Prop
 	PrecacheModel("models/ffxii/earthmodel1.mdl");
@@ -216,8 +216,8 @@ stock int CreateEntityAtOrigin(const char[] classname, const float origin[3])
 	int entity = CreateEntityByName(classname);
 	if (entity == -1)
 	{
-		ThrowError("[ItemSpawn] Error! \"CreateEntityAtOrigin\" attempted to create an invalid entity!")
-		return;
+		ThrowError("[ItemSpawn] Error! \"CreateEntityAtOrigin\" attempted to create an invalid entity!");
+		return -1;
 	}
 	TeleportEntity(entity, origin, NULL_VECTOR, NULL_VECTOR);
 	return entity;

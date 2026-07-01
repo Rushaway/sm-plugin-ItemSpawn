@@ -291,6 +291,9 @@ public void SpawnVortigaunt(float fOrigin[3])
 
 public void VortigauntPickup(const char[] output, int caller, int activator, float delay)
 {
-	ServerCommand("say ** %N has picked up Vortigaunt **", activator)
+	if (!IsValidClient(activator))
+		return;
+
+	ServerCommand("say ** %N has picked up Vortigaunt **", activator);
 	PrintToChat(activator, "Right Click to Pull Humans in front of you.");
 }
