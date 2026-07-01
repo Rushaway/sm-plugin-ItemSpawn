@@ -8,6 +8,7 @@
 #pragma semicolon 1
 
 int g_iCounter = 0;
+bool g_bSupportEntitiesCreated = false;
 
 bool g_bClientHasItem[MAXPLAYERS + 1] = {false, ...};
 
@@ -114,6 +115,8 @@ public void OnPluginStart()
 
 public void OnMapStart()
 {
+	g_bSupportEntitiesCreated = false;
+
 	// Physbox model
 	PrecacheModel("models/props/cs_militia/crate_extrasmallmill.mdl");
 
@@ -297,6 +300,15 @@ public void OnRoundStart(Event hEvent, const char[] sEvent, bool bDontBroadcast)
 
 	g_iCounter = 0;
 
+	if (!g_bSupportEntitiesCreated)
+	{
+		SetupSupportEntities();
+		g_bSupportEntitiesCreated = true;
+	}
+}
+
+void SetupSupportEntities()
+{
 	// player_weaponstrip.
 	int iPlayerStrip = CreateEntityByName("player_weaponstrip");
 	DispatchKeyFormat(iPlayerStrip, "targetname", "item_spawn_weaponstrip");
