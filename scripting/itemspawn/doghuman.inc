@@ -159,6 +159,9 @@ public void SpawnHumanDog(float fOrigin[3])
 
 public void HumanDogPickup(const char[] output, int caller, int activator, float delay)
 {
+	if (!IsValidClient(activator))
+		return;
+
 	ServerCommand("say ** %N has picked up Human Dog **", activator);
 	PrintToChat(activator, " RIGHT CLICK with your KNIFE to leave a present for the Zombies (max 4)");
 	CreateTimer(2.0, EquipWeapons, GetClientUserId(activator), TIMER_FLAG_NO_MAPCHANGE);
@@ -166,6 +169,9 @@ public void HumanDogPickup(const char[] output, int caller, int activator, float
 
 public void HumanDogUse(const char[] output, int caller, int activator, float delay)
 {
+	if (!IsValidClient(activator))
+		return;
+
 	float fOrigin[3];
 	float fAngles[3];
 	GetClientEyeAngles(activator, fAngles);

@@ -158,6 +158,9 @@ public void SpawnJumper(float fOrigin[3])
 
 public void JumperPickup(const char[] output, int caller, int activator, float delay)
 {
+	if (!IsValidClient(activator))
+		return;
+
 	ServerCommand("say ** %N has picked up Jumper **", activator);
 	PrintToChat(activator, "RIGHT CLICK = Jump Boost");
 	if (ZR_IsClientHuman(activator))
@@ -166,6 +169,9 @@ public void JumperPickup(const char[] output, int caller, int activator, float d
 
 public void JumperUse(const char[] output, int caller, int activator, float delay)
 {
+	if (!IsValidClient(activator))
+		return;
+
 	float fPushVector[3];
 	fPushVector[0] = 0.0;
 	fPushVector[1] = 0.0;

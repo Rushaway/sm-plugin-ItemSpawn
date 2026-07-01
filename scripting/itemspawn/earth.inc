@@ -35,7 +35,7 @@ public Action Command_Earth(int client, int argc)
 			{
 				if (!client)
 				{
-					ReplyToCommand(client, "ItemSpawn] Cannot spawn items on yourself as server console.");
+					ReplyToCommand(client, "[ItemSpawn] Cannot spawn items on yourself as server console.");
 					return Plugin_Handled;
 				}
 				else
@@ -160,18 +160,26 @@ void SpawnEarthStaff(float fOrigin[3], int client = -1)
 
 public void EarthStaffPickup(const char[] output, int caller, int activator, float delay)
 {
+	if (!IsValidClient(activator))
+		return;
+
 	ServerCommand("say ** %N has picked up the Earth-Staff **", activator);
 	PrintToChat(activator, "Right Click with Knife = Use.");
 }
 
 public void EarthStaffUse(const char[] output, int caller, int activator, float delay)
 {
+	if (!IsValidClient(activator))
+		return;
+
 	CreateTimer(0.75, SpawnEarth, GetClientUserId(activator), TIMER_FLAG_NO_MAPCHANGE);
 }
 
 public Action SpawnEarth(Handle timer, any userid)
 {
 	int activator = GetClientOfUserId(userid);
+	if (!IsValidClient(activator))
+		return Plugin_Stop;
 
 	float fOrigin[3];
 	float fAngles[3];
